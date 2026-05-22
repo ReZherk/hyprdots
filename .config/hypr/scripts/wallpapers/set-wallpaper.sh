@@ -9,7 +9,7 @@ if [ ! -d "$WALL_DIR" ]; then
     exit 1
 fi
 
-FILE_LIST=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" \) -printf "%f\n")
+FILE_LIST=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.gif" \) -printf "%f\n")
 
 SELECTED_FILE=$(echo "$FILE_LIST" | wofi --dmenu --prompt "Select wallpaper")
 
@@ -56,4 +56,4 @@ if command -v wal >/dev/null 2>&1; then
 else
     echo "Pywal not installed, skipping"
 fi
-echo "All done!"
+echo "All done!"cho "All done!"

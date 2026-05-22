@@ -1,0 +1,17 @@
+[config]
+version_check = false
+
+
+[templates]
+
+
+[config.wallpaper]
+command = "swww"
+arguments = ["img", "--transition-type", "center"]
+set = true
+
+
+[templates.kitty]
+input_path = '~/.config/matugen/templates/matugen-kitty.conf'
+output_path = '~/.config/kitty/themes/matugen.conf'
+

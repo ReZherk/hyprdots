@@ -1,7 +1,7 @@
 {
     "hyprland/workspaces": {
         "format": "{icon}",
-        "persistent-workspaces": { "*": 5 },
+        "persistent-workspaces": { "*": 6 },
         "cursor" : true,
         "format-icons": {
             "active": "󰣇",

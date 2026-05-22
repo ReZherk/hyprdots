@@ -1,52 +1,65 @@
 # Hyprland Rice
 
-Welcome to my Hyprland Rice configuration! This setup is designed to provide a clean, efficient, and visually appealing desktop environment.
+This repository stores the current version of my Linux desktop dotfiles from `~/.config`.
+
+## Included Configs
+
+- `btop`
+- `cava`
+- `eww`
+- `fastfetch`
+- `hypr`
+- `kitty`
+- `mako`
+- `matugen`
+- `nvim`
+- `rofi`
+- `screen`
+- `wallpapers`
+- `waybar`
+- `wofi`
 
 ## Dependencies
 
-- **Window Manager**: [Hyprland](https://github.com/hyprwm/Hyprland) - A dynamic tiling Wayland compositor.
-- **Compositor**: Wayland for smooth and modern graphics.
-- **Terminal**: [Kitty](https://sw.kovidgoyal.net/kitty/) - A fast, feature-rich, GPU-based terminal emulator.
-- **Launcher**: [Wofi](https://hg.sr.ht/~scoopta/wofi) - A Wayland-native application launcher.
-- **Bar**: [Waybar](https://github.com/Alexays/Waybar) - A highly customizable status bar.
-- **Notifications**: [Mako](https://github.com/emersion/mako) - A lightweight Wayland notification daemon.
-- **Color Scheme Generator**: [Pywal16](https://github.com/adi1090x/pywal16) - A tool to generate and apply color schemes based on your wallpaper.
+- [Hyprland](https://github.com/hyprwm/Hyprland)
+- [Kitty](https://sw.kovidgoyal.net/kitty/)
+- [Wofi](https://hg.sr.ht/~scoopta/wofi)
+- [Waybar](https://github.com/Alexays/Waybar)
+- [Mako](https://github.com/emersion/mako)
+- [Pywal16](https://github.com/adi1090x/pywal16)
+- [Matugen](https://github.com/InioX/matugen)
 
-## Screenshots
+## Screenshot
 
 ![Desktop Screenshot](.config/screen/image.png)
 
 ## Installation
 
-1. Clone this repository:
-    ```bash
-    git clone https://github.com/mkhmtolzhas/mkhmtdots
-    cd mkhmtdots
-    ```
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/mkhmtolzhas/mkhmtdots
+   cd mkhmtdots
+   ```
+2. Install the required packages:
+   ```bash
+   sudo pacman -S hyprland kitty wofi waybar mako btop cava fastfetch rofi
+   yay -S python-pywal16 matugen-bin
+   ```
+3. Run the installer:
+   ```bash
+   chmod +x install.sh
+   ./install.sh
+   ```
 
-2. Install the required dependencies:
-    ```bash
-    sudo pacman -S hyprland kitty wofi waybar mako zsh ttf-jetbrains-mono ttf-jetbrains-mono-nerd swww
-    yay -S python-pywal16
-    ```
+### Installer Options
 
-3. Copy the configuration files to their respective locations:
-    ```bash
-    cp -r .config/* ~/.config/
-    ```
+```bash
+./install.sh --no-backup
+./install.sh --no-p10k
+./install.sh --delete
+```
 
+## Notes
 
-4. Update the Waybar and Wofi configuration:
-    If your Waybar and Wofi configuration references a CSS file like:
-    ```
-    @import "/home/mkhmtcore/.cache/wal/colors-waybar.css";
-    ``` 
-    make sure to replace "mkhmtcore" with your actual username.
-
-5. Restart your session and enjoy your new setup!
-
-## Customization
-
-Feel free to tweak the configuration files in the `~/.config` directory to suit your preferences.
-
-Enjoy your Hyprland rice!
+- `waybar` and `wofi` import colors from `~/.cache/wal/colors-waybar.css`.
+- `install.sh` installs only directories tracked in this repository and optionally backs up existing files to `~/.config-backups/`.
