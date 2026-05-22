@@ -12,6 +12,7 @@ BACKUP_DIR="${BACKUP_ROOT}/mkhmtdots-${TIMESTAMP}"
 CREATE_BACKUP=1
 INSTALL_P10K=1
 DELETE_MANAGED_FILES=0
+LEGACY_HOME="/home/mkhmtcore"
 
 usage() {
   cat <<'EOF'
@@ -30,6 +31,29 @@ EOF
 
 log() {
   printf '[install] %s\n' "$1"
+}
+
+rewrite_hardcoded_home_paths() {
+  local target_root="$1"
+
+  if [[ ! -d "$target_root" || "$HOME" == "$LEGACY_HOME" ]]; then
+    return
+  fi
+
+  local -a matches=()
+  while IFS= read -r file; do
+    matches+=("$file")
+  done < <(grep -rlI -- "$LEGACY_HOME" "$target_root" 2>/dev/null || true)
+
+  if [[ ${#matches[@]} -eq 0 ]]; then
+    return
+  fi
+
+  local file
+  for file in "${matches[@]}"; do
+    perl -0pi -e 's/\Q'"$LEGACY_HOME"'\E/\Q'"$HOME"'\E/g' "$file"
+    log "Rewrote home path in ${file}"
+  done
 }
 
 copy_with_backup() {
@@ -111,6 +135,8 @@ fi
 while IFS= read -r config_dir; do
   sync_config_dir "$config_dir"
 done < <(find "$CONFIG_SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
+
+rewrite_hardcoded_home_paths "$TARGET_CONFIG_DIR"
 
 if [[ "$INSTALL_P10K" -eq 1 && -f "${SCRIPT_DIR}/.p10k.zsh" ]]; then
   copy_with_backup "${SCRIPT_DIR}/.p10k.zsh" "${HOME}/.p10k.zsh" ".p10k.zsh"
