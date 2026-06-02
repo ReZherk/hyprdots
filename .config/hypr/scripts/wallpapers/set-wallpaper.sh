@@ -11,7 +11,7 @@ fi
 
 FILE_LIST=$(find "$WALL_DIR" -type f \( -iname "*.png" -o -iname "*.jpg" -o -iname "*.gif" \) -printf "%f\n")
 
-SELECTED_FILE=$(echo "$FILE_LIST" | wofi --dmenu --prompt "Select wallpaper")
+SELECTED_FILE=$(echo "$FILE_LIST" | rofi -dmenu -p "Select wallpaper")
 
 [ -z "$SELECTED_FILE" ] && exit 1
 
@@ -20,9 +20,26 @@ echo "Setting wallpaper: $SELECTED_FILE"
 awww img --transition-type center --transition-step 90 "$WALL"
 echo "Wallpaper set successfully"
 
+# --- matugen: primary colour generator (quickshell, kitty, rofi, mako, hyprland) ---
+if command -v matugen >/dev/null 2>&1; then
+    echo "Generating matugen colors (scheme-content, dark)..."
+    matugen image "$WALL" --type scheme-content --mode dark --prefer saturation || echo "matugen failed"
+    hyprctl reload >/dev/null 2>&1 || true
+    # reload resets animations.conf → restore workspace slide direction set by quickshell
+    ws_style=$(cat "$HOME/.cache/quickshell-ws-anim" 2>/dev/null || echo slide)
+    hyprctl keyword animation "workspaces,1,5,wind,$ws_style" >/dev/null 2>&1 || true
+    pkill -USR1 kitty 2>/dev/null || true   # live-reload kitty colors (re-reads include)
+    KEYBOARD_SCRIPT="$HOME/.config/keyboard/set-color-keyboard.sh"
+    [ -x "$KEYBOARD_SCRIPT" ] && bash "$KEYBOARD_SCRIPT" >/dev/null 2>&1 &   # keyboard backlight from matugen
+    echo "matugen applied"
+else
+    echo "matugen not installed, skipping"
+fi
+
+# --- pywal: optional, kept only for Firefox (pywalfox) and Discord ---
 if command -v wal >/dev/null 2>&1; then
-    echo "Applying pywal colors..."
-    wal -i "$WALL"
+    echo "Applying pywal colors (firefox/discord)..."
+    wal -i "$WALL" -s -t
     echo "Pywal applied successfully"
     
     
@@ -35,25 +52,10 @@ if command -v wal >/dev/null 2>&1; then
         echo "pywalfox not found in PATH"
     fi
     
-    MAKO_SCRIPT="$HOME/.config/mako/update-colors.sh"
-    if [ -x "$MAKO_SCRIPT" ]; then
-        echo "Updating mako colors..."
-        bash "$MAKO_SCRIPT" &
-    else
-        echo "Mako update script not found or not executable: $MAKO_SCRIPT"
-    fi
-    
-    KEYBOARD_SCRIPT="$HOME/.config/keyboard/set-color-keyboard.sh"
-    if [ -x "$KEYBOARD_SCRIPT" ]; then
-        echo "Updating keyboard colors..."
-        bash "$KEYBOARD_SCRIPT" &
-    else
-        echo "Keyboard color script not found or not executable: $KEYBOARD_SCRIPT"
-    fi
     
     wait
     
 else
     echo "Pywal not installed, skipping"
 fi
-echo "All done!"cho "All done!"
+echo "All done!"

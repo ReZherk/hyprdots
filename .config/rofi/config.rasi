@@ -1,5 +1,4 @@
-@import "/home/mkhmtcore/.cache/wal/colors-rofi-dark.rasi"
-/* Replace the path with your USERNAME */
+@import "~/.config/rofi/colors-matugen.rasi"
 
 * {
     font:   "JetBrainsMono 14";
@@ -9,7 +8,9 @@
 }
 
 configuration {
-    show-icons: false;
+    show-icons: true;
+    icon-theme: "Adwaita";
+    drun-display-format: "{name}";
     kb-row-up: "Up,Control+k,Shift+Tab,Shift+ISO_Left_Tab";
     kb-row-down: "Down,Control+j";
     kb-accept-entry: "Control+m,Return,KP_Enter";
@@ -32,19 +33,18 @@ mainbox {
 }
 
 inputbar {
-    border:         2px;
-    border-radius:  8px;
-
-    padding:    8px 16px;
-    spacing:    8px;
-    children:   [ entry ];
-}
-
-prompt {
+    border:           0;
+    background-color: transparent;
+    padding:          0 0 12px 0;
+    children:         [ entry ];
 }
 
 entry {
-    placeholder:        "Search";
+    placeholder:      "Search";
+    background-color: @color0;
+    text-color:       @foreground;
+    border-radius:    8px;
+    padding:          10px 14px;
 }
 
 message {
@@ -57,33 +57,43 @@ textbox {
 }
 
 listview {
-    margin:     12px 0 0;
-    lines:      8;
-    columns:    1;
-
+    margin:       12px 0 0;
+    lines:        8;
+    columns:      1;
     fixed-height: false;
+    scrollbar:    false;
+    border:       0;
 }
 
 element {
-    padding:        8px 16px;
-    spacing:        8px;
-    border-radius:  8px;
+    padding:          8px 16px;
+    spacing:          10px;
+    border-radius:    8px;
+    children:         [ element-icon, element-text ];
+    background-color: transparent;
+    text-color:       @foreground;
 }
 
-element normal active {
-}
-
+element normal normal,
+element normal active,
+element alternate normal,
 element alternate active {
+    background-color: transparent;
 }
 
 element selected normal, element selected active {
+    background-color: @color8;
+    text-color:       @foreground;
 }
 
 element-icon {
-    size:           1em;
+    size:           1.4em;
     vertical-align: 0.5;
+    horizontal-align: 0.5;
 }
 
 element-text {
-    text-color: inherit;
+    text-color:       inherit;
+    vertical-align:   0.5;
+    horizontal-align: 0.0;
 }

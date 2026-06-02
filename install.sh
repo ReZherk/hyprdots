@@ -12,6 +12,7 @@ BACKUP_DIR="${BACKUP_ROOT}/mkhmtdots-${TIMESTAMP}"
 CREATE_BACKUP=1
 INSTALL_P10K=1
 DELETE_MANAGED_FILES=0
+GENERATE_THEME=1
 LEGACY_HOME="/home/mkhmtcore"
 
 usage() {
@@ -21,6 +22,7 @@ Usage: ./install.sh [options]
 Options:
   --no-backup     Skip backup of existing files
   --no-p10k       Do not install .p10k.zsh
+  --no-theme      Do not generate matugen colours after installing
   --delete        Delete files in managed config directories that do not exist in this repo
   -h, --help      Show this help message
 
@@ -104,6 +106,9 @@ while [[ $# -gt 0 ]]; do
     --no-p10k)
       INSTALL_P10K=0
       ;;
+    --no-theme)
+      GENERATE_THEME=0
+      ;;
     --delete)
       DELETE_MANAGED_FILES=1
       ;;
@@ -140,6 +145,13 @@ rewrite_hardcoded_home_paths "$TARGET_CONFIG_DIR"
 
 if [[ "$INSTALL_P10K" -eq 1 && -f "${SCRIPT_DIR}/.p10k.zsh" ]]; then
   copy_with_backup "${SCRIPT_DIR}/.p10k.zsh" "${HOME}/.p10k.zsh" ".p10k.zsh"
+fi
+
+# Generate matugen colours from a wallpaper so the freshly-installed configs
+# (kitty/rofi/mako/hyprland/quickshell/keyboard) are themed out of the box.
+if [[ "$GENERATE_THEME" -eq 1 && -x "${SCRIPT_DIR}/scripts/apply-matugen.sh" ]]; then
+  log "Generating matugen theme..."
+  "${SCRIPT_DIR}/scripts/apply-matugen.sh" || log "Theme generation skipped/failed (non-fatal)"
 fi
 
 log "Install complete"
