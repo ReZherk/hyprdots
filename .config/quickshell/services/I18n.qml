@@ -30,6 +30,7 @@ Singleton {
         "posBottom": "Bottom",
         "posLeft": "Left",
         "posRight": "Right",
+        "wallpapers": "Wallpapers",
         "weekdays": ["Mon", "Tue", "Wed", "Thu", "Fri", "Sat", "Sun"]
     })
 
@@ -47,6 +48,7 @@ Singleton {
         "posBottom": "Снизу",
         "posLeft": "Слева",
         "posRight": "Справа",
+        "wallpapers": "Обои",
         "weekdays": ["Пн", "Вт", "Ср", "Чт", "Пт", "Сб", "Вс"]
     })
 

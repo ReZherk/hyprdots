@@ -8,6 +8,7 @@ import "config"
 import "modules/bar"
 import "modules/osd"
 import "modules/dashboard"
+import "modules/wallpaper"
 
 ShellRoot {
     id: shell
@@ -46,6 +47,9 @@ ShellRoot {
 
     // Dashboard (toggled via Super+D or clicking the clock).
     Dashboard {}
+
+    // Visual wallpaper picker (toggled via Super+W).
+    WallpaperPicker {}
 
     // ── Bar position hotkeys (bound in Hyprland as quickshell:bar*) ──
     GlobalShortcut {
