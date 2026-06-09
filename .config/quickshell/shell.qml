@@ -10,6 +10,7 @@ import "modules/osd"
 import "modules/dashboard"
 import "modules/wallpaper"
 import "modules/overview"
+import "modules/cheatsheet"
 
 ShellRoot {
     id: shell
@@ -54,6 +55,9 @@ ShellRoot {
 
     // Workspace overview (toggled via Super+T).
     Overview {}
+
+    // Keybindings cheatsheet (toggled via Super+/).
+    Cheatsheet {}
 
     // ── Bar position hotkeys (bound in Hyprland as quickshell:bar*) ──
     GlobalShortcut {

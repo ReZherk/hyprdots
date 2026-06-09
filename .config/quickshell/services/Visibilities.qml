@@ -10,4 +10,5 @@ Singleton {
     property bool positionPicker: false
     property bool wallpaperPicker: false
     property bool overview: false
+    property bool cheatsheet: false
 }

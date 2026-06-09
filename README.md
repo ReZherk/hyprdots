@@ -21,6 +21,9 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
   - **Workspace overview** (`Super+T`): per-app coloured window cards you can
     **drag** between workspaces or rearrange within one (floating moves freely,
     tiled windows swap), with the real Hyprland layout updating live.
+  - **Keybindings cheatsheet** (`Alt+F1`): an overlay that **auto-parses**
+    `hypr/configs/keybinds.conf` into searchable, categorised cards — no manual
+    list to maintain. Themed by matugen like the rest of the shell.
   - Volume / brightness **OSD**, Material 3 motion animations.
   - **Localised** (follows `$LANG`; ru/en included).
 - **matugen theming** — colours generated from the wallpaper for the bar,
