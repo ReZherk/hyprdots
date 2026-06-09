@@ -9,4 +9,5 @@ Singleton {
     property bool dashboard: false
     property bool positionPicker: false
     property bool wallpaperPicker: false
+    property bool overview: false
 }

@@ -13,7 +13,7 @@ CREATE_BACKUP=1
 INSTALL_P10K=1
 DELETE_MANAGED_FILES=0
 GENERATE_THEME=1
-LEGACY_HOME="/home/mkhmtcore"
+LEGACY_HOME="/home/patrick"
 
 usage() {
   cat <<'EOF'

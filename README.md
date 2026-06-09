@@ -3,6 +3,10 @@
 My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
 **Quickshell** desktop shell and **matugen** wallpaper-based theming.
 
+> Personal fork — originally based on
+> [mkhmtolzhas/mkhmtdots](https://github.com/mkhmtolzhas/mkhmtdots),
+> customized to my own setup (hardware: **Intel UHD + NVIDIA RTX**).
+
 ## Highlights
 
 - **Custom Quickshell shell** (replaces waybar):
@@ -14,6 +18,9 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
   - **Dashboard** that merges out of the bar (`Super+D` or click the clock):
     media player (Mpris) with seek, calendar, CPU/RAM/temp/disk, quick toggles
     (WiFi/BT/DND), brightness/volume sliders, power buttons.
+  - **Workspace overview** (`Super+T`): per-app coloured window cards you can
+    **drag** between workspaces or rearrange within one (floating moves freely,
+    tiled windows swap), with the real Hyprland layout updating live.
   - Volume / brightness **OSD**, Material 3 motion animations.
   - **Localised** (follows `$LANG`; ru/en included).
 - **matugen theming** — colours generated from the wallpaper for the bar,
@@ -57,7 +64,7 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/mkhmtolzhas/mkhmtdots
+   git clone <YOUR-REPO-URL>   # e.g. https://github.com/<your-user>/mkhmtdots
    cd mkhmtdots
    ```
 2. Install the required packages:
@@ -92,4 +99,13 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
   It is **not** shipped in this repo — drop it in `~/.config/keyboard/` or put it
   on `PATH`. Without it, `set-color-keyboard.sh` simply no-ops.
 - `install.sh` installs only directories tracked in this repo and optionally
-  backs up existing files to `~/.config-backups/`.
+  backs up existing files to `~/.config-backups/`. It also rewrites any
+  hard-coded home paths (`/home/patrick`) to the target machine's `$HOME`, so
+  the configs work under a different username.
+- **Hybrid GPU (Intel + NVIDIA RTX).** The NVIDIA env vars live in
+  `hypr/configs/env.conf` (`LIBVA_DRIVER_NAME`, `__GLX_VENDOR_LIBRARY_NAME`).
+  They only take full effect after re-logging into Hyprland. On a machine with
+  different GPUs, review that file.
+- Only a few sample wallpapers are committed; the rest of my collection is
+  git-ignored. Drop your own images into `~/.config/wallpapers/` and theme with
+  `Super+W`.

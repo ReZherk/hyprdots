@@ -1,0 +1,31 @@
+# Shells de Quickshell que NO uso (descargados solo para probar)
+.config/quickshell/ii/
+.config/quickshell/cartoon-shell/
+
+# Wallpapers: solo versiono unos pocos de muestra, no toda mi colección (~96M)
+.config/wallpapers/*
+!.config/wallpapers/abstract.jpg
+!.config/wallpapers/black-white.jpg
+!.config/wallpapers/blue_mountains.JPG
+
+# Binario propietario del teclado Legion (no se distribuye, va aparte)
+.config/keyboard/legion-kb-rgb
+
+# Cachés y compilados de Quickshell/QML
+*.qmlc
+*.jsc
+.cache/
+
+# Configs Lua de otro framework de Hyprland (no las uso, hyprland.conf no las carga)
+.config/hypr/.lua-disabled/
+.config/hypr/custom/
+
+# Backups
+*.bak
+*.bak.*
+
+# Basura general
+*.log
+__pycache__/
+*.swp
+.DS_Store

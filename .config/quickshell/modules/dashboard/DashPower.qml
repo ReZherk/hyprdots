@@ -9,6 +9,7 @@ Row {
     Repeater {
         model: [
             { "icon": "",   "cmd": "loginctl lock-session" },
+            { "icon": "",  "cmd": "systemctl suspend || loginctl suspend" },
             { "icon": "", "cmd": "hyprctl dispatch exit" },
             { "icon": "", "cmd": "systemctl reboot" },
             { "icon": "",  "cmd": "systemctl poweroff" }
