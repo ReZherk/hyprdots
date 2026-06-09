@@ -67,8 +67,8 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
 
 1. Clone the repository:
    ```bash
-   git clone <YOUR-REPO-URL>   # e.g. https://github.com/<your-user>/mkhmtdots
-   cd mkhmtdots
+   git clone https://github.com/ReZherk/hyprdots
+   cd hyprdots
    ```
 2. Install the required packages:
    ```bash
