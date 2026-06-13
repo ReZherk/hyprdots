@@ -73,9 +73,20 @@ My Linux desktop dotfiles (`~/.config`) — a **Hyprland** setup with a custom
 2. Install the required packages:
    ```bash
    sudo pacman -S hyprland kitty rofi mako btop cava fastfetch brightnessctl \
-                  playerctl cliphist ttf-jetbrains-mono-nerd
+                  playerctl cliphist ttf-jetbrains-mono-nerd \
+                  hyprshot grim slurp \
+                  pipewire wireplumber pipewire-pulse xdg-desktop-portal-hyprland \
+                  intel-media-driver
    yay -S quickshell matugen-bin python-pywal16 awww
    ```
+   Notes (hybrid Intel + NVIDIA laptop):
+   - `pipewire wireplumber xdg-desktop-portal-hyprland` are required for screen
+     sharing (the ScreenCast portal). Without them, sharing your screen in
+     browsers / Discord / Teams will not work.
+   - `intel-media-driver` provides the `iHD` VAAPI driver used in
+     `hypr/configs/env.conf` for stable video decoding on the Intel iGPU.
+     On a machine without an Intel iGPU, change `LIBVA_DRIVER_NAME` there.
+   - `hyprshot grim slurp` power the Print / Super+Print screenshot keybinds.
 3. Run the installer:
    ```bash
    chmod +x install.sh
