@@ -141,6 +141,13 @@ while IFS= read -r config_dir; do
   sync_config_dir "$config_dir"
 done < <(find "$CONFIG_SOURCE_DIR" -mindepth 1 -maxdepth 1 -type d | sort)
 
+# Instalar archivos sueltos en la raiz de .config (p.ej. brave-flags.conf,
+# microsoft-edge-stable-flags.conf). El bucle de arriba solo cubre directorios.
+while IFS= read -r config_file; do
+  file_name="$(basename "$config_file")"
+  copy_with_backup "$config_file" "${TARGET_CONFIG_DIR}/${file_name}" ".config/${file_name}"
+done < <(find "$CONFIG_SOURCE_DIR" -mindepth 1 -maxdepth 1 -type f | sort)
+
 rewrite_hardcoded_home_paths "$TARGET_CONFIG_DIR"
 
 if [[ "$INSTALL_P10K" -eq 1 && -f "${SCRIPT_DIR}/.p10k.zsh" ]]; then
